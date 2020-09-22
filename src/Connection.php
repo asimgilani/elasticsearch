@@ -63,7 +63,13 @@ class Connection
             $clientBuilder->setHandler($config['handler']);
         }
 
-        $clientBuilder->setHosts($config["servers"]);
+
+        if(array_key_exists('cloud_id',$config['servers'])){
+            $clientBuilder->setElasticCloudId($config['servers']['cloud_id')  
+            $clientBuilder->setBasicAuthentication($config['servers']['user'], $config['servers']['pass'])
+        } else {
+         $clientBuilder->setHosts($config["servers"]);
+        }
 
         $clientBuilder = self::configureLogging($clientBuilder,$config);
 
@@ -104,7 +110,12 @@ class Connection
             // Instantiate a new ClientBuilder
             $clientBuilder = ClientBuilder::create();
 
-            $clientBuilder->setHosts($config["servers"]);
+            if(array_key_exists('cloud_id',$config['servers'])){
+                $clientBuilder->setElasticCloudId($config['servers']['cloud_id')  
+                $clientBuilder->setBasicAuthentication($config['servers']['user'], $config['servers']['pass'])
+            } else {
+             $clientBuilder->setHosts($config["servers"]);
+            }
 
             $clientBuilder = self::configureLogging($clientBuilder,$config);
 
