@@ -93,8 +93,8 @@ class Query
      * @var array
      */
     protected $_source = [
-        "include" => [],
-        "exclude" => []
+        "includes" => [],
+        "excludes" => []
     ];
 
     /**
@@ -396,9 +396,9 @@ class Query
             }
         }
 
-        $this->_source["include"] = array_unique(array_merge($this->_source["include"], $fields));
-        $this->_source["exclude"] = array_values(array_filter($this->_source["exclude"], function ($field) {
-            return !in_array($field, $this->_source["include"]);
+        $this->_source["includes"] = array_unique(array_merge($this->_source["includes"], $fields));
+        $this->_source["excludes"] = array_values(array_filter($this->_source["excludes"], function ($field) {
+            return !in_array($field, $this->_source["includes"]);
         }));
 
         return $this;
@@ -423,8 +423,8 @@ class Query
             }
         }
 
-        $this->_source["exclude"] = array_unique(array_merge($this->_source["exclude"], $fields));
-        $this->_source["include"] = array_values(array_filter($this->_source["include"], function ($field) {
+        $this->_source["excludes"] = array_unique(array_merge($this->_source["excludes"], $fields));
+        $this->_source["includes"] = array_values(array_filter($this->_source["includes"], function ($field) {
             return !in_array($field, $this->_source["exclude"]);
         }));
 
