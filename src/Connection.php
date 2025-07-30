@@ -123,6 +123,10 @@ class Connection
                 $clientBuilder->setHandler($config['handler']);
             }
 
+            if (!empty($config['sslVerification'])) {
+                $clientBuilder->setSSLVerification($config['sslVerification']);
+            }
+
             // Build the client object
             $connection = $clientBuilder->build();
 
